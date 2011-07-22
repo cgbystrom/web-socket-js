@@ -239,11 +239,12 @@
         WEB_SOCKET_SWF_LOCATION.match(/^\w+:\/\/([^\/]+)/)) {
       var swfHost = RegExp.$1;
       if (location.host != swfHost) {
-        console.error(
-            "[WebSocket] You must host HTML and WebSocketMain.swf in the same host " +
+        var msg = "[WebSocket] You must host HTML and WebSocketMain.swf in the same host " +
             "('" + location.host + "' != '" + swfHost + "'). " +
             "See also 'How to host HTML file and SWF file in different domains' section " +
-            "in README.md.");
+            "in README.md.";
+        eventCallback("different-host", msg);
+        console.error(msg);
       }
     }
     var container = document.createElement("div");
