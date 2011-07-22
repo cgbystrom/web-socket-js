@@ -280,7 +280,9 @@
       null,
       function(e) {
         if (!e.success) {
-          console.error("[WebSocket] swfobject.embedSWF failed");
+          var msg = "[WebSocket] swfobject.embedSWF failed";
+          eventCallback("embed-error", msg);
+          console.error(msg);
         }
       });
   };
