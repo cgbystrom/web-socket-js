@@ -7,6 +7,10 @@
 
   if (window.WebSocket && !window.WEB_SOCKET_FORCE_FLASH) return;
 
+  var eventCallback = function () {};
+  if (window.WEB_SOCKET_EVENT_CALLBACK && typeof(window.WEB_SOCKET_EVENT_CALLBACK) == 'function')
+    eventCallback = window.WEB_SOCKET_EVENT_CALLBACK;
+
   var console = window.WEB_SOCKET_CONSOLE || window.console;
   if (!console || !console.log || !console.error) {
     console = {log: function(){ }, error: function(){ }};
@@ -18,10 +22,11 @@
     return;
   }
   if (location.protocol == "file:") {
-    console.error(
-      "WARNING: web-socket-js doesn't work in file:///... URL " +
+    var msg = "WARNING: web-socket-js doesn't work in file:///... URL " +
       "unless you set Flash Security Settings properly. " +
-      "Open the page via Web server i.e. http://...");
+      "Open the page via Web server i.e. http://...";
+    eventCallback('file-protocol-warning', msg);
+    console.error(msg);
   }
 
   /**
