@@ -230,7 +230,9 @@
       window.WEB_SOCKET_SWF_LOCATION = WebSocket.__swfLocation;
     }
     if (!window.WEB_SOCKET_SWF_LOCATION) {
-      console.error("[WebSocket] set WEB_SOCKET_SWF_LOCATION to location of WebSocketMain.swf");
+      var msg = "[WebSocket] set WEB_SOCKET_SWF_LOCATION to location of WebSocketMain.swf";
+      eventCallback("missing-swf-location", msg);
+      console.error(msg);
       return;
     }
     if (!WEB_SOCKET_SWF_LOCATION.match(/(^|\/)WebSocketMainInsecure\.swf(\?.*)?$/) &&
