@@ -319,6 +319,7 @@
           WebSocket.__instances[events[i].webSocketId].__handleEvent(events[i]);
         }
       } catch (e) {
+        eventCallback("flash-event-error", msg);
         console.error(e);
       }
     }, 0);
@@ -332,6 +333,7 @@
   
   // Called by Flash.
   WebSocket.__error = function(message) {
+    eventCallback("flash-error", decodeURIComponent(message));
     console.error(decodeURIComponent(message));
   };
   
