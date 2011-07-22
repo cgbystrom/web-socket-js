@@ -7,7 +7,7 @@
 
   if (window.WebSocket && !window.WEB_SOCKET_FORCE_FLASH) return;
 
-  var console = window.console;
+  var console = window.WEB_SOCKET_CONSOLE || window.console;
   if (!console || !console.log || !console.error) {
     console = {log: function(){ }, error: function(){ }};
   }
